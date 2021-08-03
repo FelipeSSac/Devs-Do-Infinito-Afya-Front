@@ -1,7 +1,4 @@
 <h1 align="center">AGMed</h1>
-<p align="center">
-  <img alt="AGMed" src="https://raw.githubusercontent.com/vlruiz108/Devs-Do-Infinito-Afya-Labs/main/Logo.PNG" width="160px">
-</p>
 
 [![Devs Do Infinito - Front](https://res.cloudinary.com/marcomontalbano/image/upload/v1623702310/video_to_markdown/images/youtube--JJAb-j0JRKY-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.youtube.com/watch?v=JJAb-j0JRKY "Devs Do Infinito - Front")
 
