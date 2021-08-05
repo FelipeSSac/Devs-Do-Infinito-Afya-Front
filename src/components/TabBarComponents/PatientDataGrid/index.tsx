@@ -15,11 +15,7 @@ const PatientDataGrid: React.FC = () => {
 
   useEffect(() => {
     setIsLoaded(true)
-    api.get('client', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-      }
-    }).then(
+    api.get('patient').then(
       response => {
         const datas = response.data
         for (let i = 0; i < datas.length; i++) {

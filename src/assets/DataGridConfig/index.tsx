@@ -39,8 +39,8 @@ export interface IMainRow {
 export interface IProRow {
   id: number | undefined,
   register: string,
-  profession_name: string,
-  specialist_name: string,
+  id_profession: string,
+  name: string,
   email: string,
 }
 
@@ -48,7 +48,7 @@ export interface IPatientRow {
   id: number | undefined,
   cpf: string,
   cellphone: string,
-  client_name: string,
+  name: string,
   email: string,
   id_med_reg: string,
 }
@@ -190,7 +190,7 @@ export const columnsPatient: GridColDef[] = [
     flex: 1.5
   },
   {
-    field: 'client_name',
+    field: 'name',
     headerName: 'Paciente',
     flex: 2
   },
@@ -214,12 +214,12 @@ export const columnsPro: GridColDef[] = [
     flex: 1
   },
   {
-    field: 'profession_name',
+    field: 'id_profession',
     headerName: 'Especialidade',
     flex: 2
   },
   {
-    field: 'specialist_name',
+    field: 'name',
     headerName: 'Profissional',
     headerAlign: 'left',
     flex: 2

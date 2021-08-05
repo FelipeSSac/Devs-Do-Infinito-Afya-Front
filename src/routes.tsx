@@ -3,7 +3,6 @@ import PrivateRoutes from './privateRoutes';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Login from './views/pages/Login';
-import Teste from './views/pages/Teste';
 import Home from './views/pages/Home';
 import Schedules from './views/pages/Schedules';
 import MedRecords from './views/pages/MedRecords';
@@ -16,7 +15,6 @@ const Routes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route path="/teste" component={Teste} />
         <PrivateRoutes path="/home" component={Home} />
         <PrivateRoutes path="/schedule" component={Schedules} />
         <PrivateRoutes path="/medrecord" component={MedRecords} />

@@ -23,8 +23,8 @@ export const HomeContent = styled.div`
   & .content{
     display: flex;
     border-radius: 5px;
-    width: 83.20%;
-    margin:20px 0 20px 20px;
+    width: 82.5%;
+    margin:0 0 0 15px;
     font-weight: bold;
   }
 

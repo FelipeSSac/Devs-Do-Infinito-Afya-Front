@@ -27,12 +27,12 @@ export interface IPatientId {
 }
 
 export interface IProId {
-  specialist_name: string;
+  name: string;
   cpf: string;
   phone?: string;
   cellphone?: string;
   email: string;
-  id_profession: number | unknown;
+  id_profession: string | unknown;
   zip_code: string;
   street: string;
   number: string;
@@ -45,18 +45,18 @@ export interface IProId {
 
 export interface IProfession {
   id: number,
-  profession_name: string,
+  name: string,
 }
 
 export interface IProfessional {
   id: string,
-  specialist_name: string,
-  profession_name: string,
+  name: string,
+  id_profession: string,
 }
 
 export interface IPatient {
   id: string,
-  client_name: string,
+  name: string,
   cpf: string,
 }
 

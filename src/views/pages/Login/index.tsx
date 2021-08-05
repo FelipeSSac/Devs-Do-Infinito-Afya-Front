@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { LoginContent } from './styles';
 
@@ -7,9 +7,15 @@ import { AddCircle, Lock } from '@material-ui/icons';
 
 import FormSignIn from '../../../components/TabBarComponents/FormSignIn';
 import FormSignUp from '../../../components/TabBarComponents/FormSignUp';
+import { toast } from 'react-toastify';
 
 
 const Login: React.FC = () => {
+
+  useEffect(() => {
+    toast.error('Versão com API Mock, possui falhas de seguranças, utilize senhas falsas', {autoClose: false});
+  },[])
+
   return (
     <LoginContent>
       <div className="container">

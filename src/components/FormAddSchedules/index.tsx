@@ -16,7 +16,7 @@ import { api } from '../../service/api';
 
 import { FormAddSchedulesContent } from './styles';
 import { Autocomplete } from '@material-ui/lab';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 interface ISchedule {
   attendance_date: string;
@@ -37,20 +37,12 @@ const FormAddSchedules: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    api.get('specialist', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-      }
-    }).then(
+    api.get('specialist').then(
       response => {
         setProfessionals(response.data)
       }
     ).catch(err => console.error(err))
-    api.get('client', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-      }
-    }).then(
+    api.get('patient').then(
       response => {
         setPatients(response.data)
       }
@@ -60,18 +52,19 @@ const FormAddSchedules: React.FC = () => {
   const ScheduleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      setIsLoaded(true)
-      api.post('attendance', formSchedule, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-        }
-      }).then(
-        response => {
-          toast.success('Sucesso no cadastro!')
-        }
-      ).catch(err => console.log(err.response)).finally(() => {
-        setIsLoaded(false)
-      })
+      console.debug(formSchedule);
+      // setIsLoaded(true)
+      // api.post('attendance', formSchedule, {
+      //   headers: {
+      //     Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
+      //   }
+      // }).then(
+      //   response => {
+      //     toast.success('Sucesso no cadastro!')
+      //   }
+      // ).catch(err => console.log(err.response)).finally(() => {
+      //   setIsLoaded(false)
+      // })
     }, [formSchedule])
 
   return (
@@ -87,10 +80,10 @@ const FormAddSchedules: React.FC = () => {
             onChange={(e, value) => setFormSchedule({ ...formSchedule, FK_id_med_reg: value?.id })}
             renderOption={(option) => (
               <React.Fragment>
-                {option.client_name} ({option.cpf.substr(0, 3)}.{option.cpf.substr(3, 3)}.{option.cpf.substr(6, 2)}-{option.cpf.substr(8, 3)})
+                {option.name} ({option.cpf.substr(0, 3)}.{option.cpf.substr(3, 3)}.{option.cpf.substr(6, 2)}-{option.cpf.substr(8, 3)})
               </React.Fragment>
             )}
-            getOptionLabel={(option) => option.client_name}
+            getOptionLabel={(option) => option.name}
             renderInput={(params) => <TextField {...params} label="Selecione o paciente" variant="outlined" required />}
           />
           <Autocomplete
@@ -98,9 +91,9 @@ const FormAddSchedules: React.FC = () => {
             options={professionals}
             autoHighlight
             style={{ height: 55 }}
-            groupBy={(option) => option.profession_name}
+            groupBy={(option) => option.id_profession}
             onChange={(e, value) => setFormSchedule({ ...formSchedule, FK_id_specialist: value?.id })}
-            getOptionLabel={(option) => option.specialist_name}
+            getOptionLabel={(option) => option.name}
             renderInput={(params) => <TextField {...params} label="Selecione o Especialista" variant="outlined" required />}
           />
           <TextField

@@ -34,46 +34,48 @@ const FormAddMedRecords: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
 
-  useEffect(() => {
-    api.get('attendance', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-      }
-    }).then(
-      response => {
-        const datas = response.data
-        for (let i = 0; i < datas.length; i++) {
-          datas[i].attendance_time = (new Date(datas[i].attendance_date).toLocaleTimeString('pt-BR')).slice(0, 5)
-          datas[i].attendance_date = new Date(datas[i].attendance_date).toLocaleDateString('pt-BR')
-        }
-        setPatients(datas)
-      }
-    ).catch(err => console.error(err))
-  }, [])
+  // useEffect(() => {
+  //   api.get('attendance', {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
+  //     }
+  //   }).then(
+  //     response => {
+  //       const datas = response.data
+  //       for (let i = 0; i < datas.length; i++) {
+  //         datas[i].attendance_time = (new Date(datas[i].attendance_date).toLocaleTimeString('pt-BR')).slice(0, 5)
+  //         datas[i].attendance_date = new Date(datas[i].attendance_date).toLocaleDateString('pt-BR')
+  //       }
+  //       setPatients(datas)
+  //     }
+  //   ).catch(err => console.error(err))
+  // }, [])
 
-  const medRecSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setIsLoaded(true)
-      api.put('attendance', data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-        }
-      })
-      api.post('historic', formMedRec, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-        }
-      }).then(
-        response => {
-          toast.success('Sucesso no cadastro!')
-        }
-      ).catch(err => toast.error('Ooops algo deu errado, tente novamente mais tarde')).finally(() => setIsLoaded(false))
-    }, [data, formMedRec])
+  // const medRecSubmit = useCallback(
+  //   (e: FormEvent<HTMLFormElement>) => {
+  //     e.preventDefault();
+  //     setIsLoaded(true)
+  //     api.put('attendance', data, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
+  //       }
+  //     })
+  //     api.post('historic', formMedRec, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
+  //       }
+  //     }).then(
+  //       response => {
+  //         toast.success('Sucesso no cadastro!')
+  //       }
+  //     ).catch(err => toast.error('Ooops algo deu errado, tente novamente mais tarde')).finally(() => setIsLoaded(false))
+  //   }, [data, formMedRec])
 
   return (
     <FormMRContent>
-      <form onSubmit={medRecSubmit}>
+      <form 
+        // onSubmit={medRecSubmit}
+      >
         <div id="box">
           <Autocomplete
             id="Patient-select"

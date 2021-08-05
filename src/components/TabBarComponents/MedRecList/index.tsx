@@ -30,33 +30,33 @@ const MedRecList: React.FC = () => {
   const [fkId, setFkId] = useState<string | undefined>(" ");
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  useEffect(() => {
-    api.get('attendance', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-      }
-    }).then(
-      response => {
-        setPatients(response.data)
-      }
-    ).catch(err => console.error(err))
-  }, [])
+  // useEffect(() => {
+  //   api.get('attendance', {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
+  //     }
+  //   }).then(
+  //     response => {
+  //       setPatients(response.data)
+  //     }
+  //   ).catch(err => console.error(err))
+  // }, [])
 
-  useEffect(() => {
-    if (fkId !== " " || undefined) {
-      setIsLoaded(false)
-      api.get(`historic/${fkId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-        }
-      }).then(
-        response => {
-          setIsLoaded(true)
-          setHistoric(response.data)
-        }
-      )
-    }
-  }, [fkId])
+  // useEffect(() => {
+  //   if (fkId !== " " || undefined) {
+  //     setIsLoaded(false)
+  //     api.get(`historic/${fkId}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
+  //       }
+  //     }).then(
+  //       response => {
+  //         setIsLoaded(true)
+  //         setHistoric(response.data)
+  //       }
+  //     )
+  //   }
+  // }, [fkId])
 
   return (
     <MedRecListContent>

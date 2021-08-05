@@ -14,7 +14,7 @@ interface IProForm {
   id_profession: string | unknown;
 }
 interface IProName {
-  profession_name: string;
+  name: string;
 }
 
 const FormEditProfessions: React.FC = () => {
@@ -28,7 +28,7 @@ const FormEditProfessions: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    api.get('profession', {
+    api.get('professions', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
       }
@@ -45,13 +45,9 @@ const FormEditProfessions: React.FC = () => {
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
       setIsLoaded(true)
-      api.post('profession', professionName, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-        }
-      }).then(
+      api.post('professions', professionName).then(
         response => {
-          toast.success('Profissão editada com sucesso!')
+          toast.success('Profissão cadastrada com sucesso!')
         }
       ).catch(err => toast.error('Ooops, algo deu errado!')).finally(() => {
         setIsLoaded(false)
@@ -63,15 +59,16 @@ const FormEditProfessions: React.FC = () => {
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
       setIsLoaded(true)
-      api.put('profession', formPro, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('@TokenAGMed')}`
-        }
-      }).then(
+      api.put(`professions/${formPro.id_profession}`, 
+        { "name":formPro.profession_name }
+      ).then(
         response => {
-          toast.success('Profissão cadastrada com sucesso!')
+          toast.success('Profissão editada com sucesso!')
         }
-      ).catch(err => toast.error('Ooops, algo deu errado!')).finally(() => {
+      ).catch(err => {
+        toast.error('Ooops, algo deu errado!')
+        console.debug(err)
+      }).finally(() => {
         setIsLoaded(false)
       })
     }, [formPro])
@@ -83,7 +80,7 @@ const FormEditProfessions: React.FC = () => {
         <div id="box">
           <section>
             <TextField label="Definir nova profissão" color="primary" variant="outlined" required
-              onChange={e => setProfessionName({ profession_name: e.target.value })}
+              onChange={e => setProfessionName({ name: e.target.value })}
             />
             {isLoaded ? (
               <Button className="btn" variant="contained" color="primary" disabled>
@@ -97,12 +94,12 @@ const FormEditProfessions: React.FC = () => {
           </section>
           <section>
             <Autocomplete
-              id="Patient-select"
+              id="Profession-select"
               options={profession}
               autoHighlight
               style={{ height: 55 }}
               onChange={(e, value) => setFormPro({ ...formPro, id_profession: value?.id })}
-              getOptionLabel={(option) => option.profession_name}
+              getOptionLabel={(option) => option.name}
               renderInput={(params) => <TextField {...params} label="Selecione a profissão" variant="outlined" required />}
             />
             <TextField label="Definir profissão" color="primary" variant="outlined" required
