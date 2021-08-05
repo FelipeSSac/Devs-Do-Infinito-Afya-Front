@@ -1,13 +1,18 @@
-import React, { FormEvent, useCallback, useEffect, useState } from 'react';
+import React, { 
+  // FormEvent, 
+  // useCallback, 
+  // useEffect, 
+  useState 
+} from 'react';
 
 import { Button, CircularProgress, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
 import { IAutoMedRec } from '../../../assets/FormAddClientConfig';
-import { api } from '../../../service/api';
+// import { api } from '../../../service/api';
 
 import { FormMRContent } from './styles';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 interface IMedRec {
   FK_id_attendances: string | undefined;
